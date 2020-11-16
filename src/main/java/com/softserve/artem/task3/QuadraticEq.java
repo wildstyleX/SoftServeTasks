@@ -1,34 +1,103 @@
 package com.softserve.artem.task3;
 
-import java.util.InputMismatchException;
-import java.util.Scanner;
+import com.softserve.artem.task2.ComplexNumber;
+
+import java.text.DecimalFormat;
 
 public class QuadraticEq {
-    public static void go() throws InputMismatchException {
-        double a, b, c, root1, root2;
-        Scanner scan = new Scanner(System.in);
-        System.out.println("\nEnter value of a: ");
-        a = scan.nextDouble();
-        if (a == 0){
-            throw new InputMismatchException();
-        }
-        System.out.println("Enter value of b: ");
-        b = scan.nextDouble();
-        System.out.println("Enter value of c: ");
-        c = scan.nextDouble();
-        double determinant = b * b - 4 * a * c;
+   private double a;
+   private double b; // коэффициент квадратного уравнения ax^2+bx+c
+   private double c;
+   private double root1;
+   private double root2;
+   private double determinant;
+   private ComplexNumber result;
 
+    public QuadraticEq(double a, double b, double c) {
+        this.a = a;
+        this.b = b;
+        this.c = c;
+    }
+
+    public QuadraticEq(double a, double b, double c, double root1, double root2, double determinant) {
+        this.a = a;
+        this.b = b;
+        this.c = c;
+        this.root1 = root1;
+        this.root2 = root2;
+        this.determinant = determinant;
+    }
+
+    public double getA() {
+        return a;
+    }
+
+    public void setA(double a) {
+        this.a = a;
+    }
+
+    public double getB() {
+        return b;
+    }
+
+    public void setB(double b) {
+        this.b = b;
+    }
+
+    public double getC() {
+        return c;
+    }
+
+    public void setC(double c) {
+        this.c = c;
+    }
+
+    public double getRoot1() {
+        return root1;
+    }
+
+    public void setRoot1(double root1) {
+        this.root1 = root1;
+    }
+
+    public double getRoot2() {
+       return root2;
+    }
+
+    public void setRoot2(double root2) {
+        this.root2 = root2;
+    }
+
+    public double getDeterminant() {
+        return determinant;
+    }
+
+    public void setDeterminant(double determinant) {
+        this.determinant = determinant;
+    }
+
+    public ComplexNumber getResult() {
+        return result;
+    }
+
+    public void setResult(ComplexNumber result) {
+        this.result = result;
+    }
+
+    public String toString() {
         if (determinant > 0) {
-                root1 = (-b + Math.sqrt(determinant)) / (2 * a);
-                root2 = (-b - Math.sqrt(determinant)) / (2 * a);
-                System.out.format(" Roots are real: root1 = %.2f; Root2 = %.2f", root1, root2);
-            } else if (determinant == 0) {
-                root1 = root2 = -b / (2 * a);
-                System.out.format("Roots are equal: Root1 = Root2 = %.2f", root1);
-            } else {
-                double real = -b / (2 *a);
-                double img = Math.sqrt(-determinant) / (2 * a);
-                System.out.format("Roots are complex: Root1 = %.2f + %.2fi; Root2 = %.2f+ %.2fi", real, img, real, img);
-            }
+            String fRoot1 = new DecimalFormat("#.##").format(root1);
+            String fRoot2 = new DecimalFormat("#.##").format(root2);
+            return "Root1 = " + fRoot1 + ". Root2 = " + fRoot2 + ".";
+        }
+        else if (determinant == 0) {
+            String fRoot = new DecimalFormat("#.##").format(root1);
+            return "Roots are equal. Root1 = Root2 = " + fRoot;
+        }
+        else {
+            String fReal = new DecimalFormat("#.##").format(result.getReal());
+            String fImag = new DecimalFormat("#.##").format(result.getImg());
+            return "Roots are complex. Root1 = " + fReal + " + " + fImag + "i. Root2 = " + fReal + " - " + fImag + "i.";
+        }
     }
 }

@@ -1,7 +1,8 @@
 package com.softserve.artem.task1;
 
-import com.softserve.artem.task2.ComplexSolver;
-import com.softserve.artem.task3.QuadraticEq;
+import com.softserve.artem.task2.ComplexNumber;
+import com.softserve.artem.task2.ComplexNumberUtil;
+import com.softserve.artem.task3.QuadraticEquationUtil;
 import com.softserve.artem.task4.NumbConvert;
 
 import java.util.InputMismatchException;
@@ -16,23 +17,28 @@ public class Dispatcher {
                         "1) - Perform simple operations on complex numbers;\n\n" +
                         "2) - Solve quadratic equations;\n\n" +
                         "3) - Convert number between decimal and quinary numeral systems;\n\n" +
-                        "4) - Exit\n");
+                        "0) - Exit\n");
 
                 int choice = scanner.nextInt();
-                if (choice == 1) {
-                    ComplexSolver.go();
-                    } else if (choice == 2) {
-                    QuadraticEq.go();
-                    } else if (choice == 3) {
-                    NumbConvert.go();
-                    } else if (choice == 4) {
-                    System.exit(0);
-                    } else {
-                    throw new InputMismatchException();
-                    }
+                switch (choice) {
+                    case (0):
+                        System.exit(0);
+                        break;
+                    case (1):
+                        ComplexNumber complexNumber = new ComplexNumber(0,0);
+                        ComplexNumberUtil.go();
+                        break;
+                    case (2):
+                        QuadraticEquationUtil.go();
+                        break;
+                    case (3):
+                        NumbConvert.go();
+                        break;
+                    default:
+                        throw new InputMismatchException();
+                }
                 System.out.println("\n\nPress any key to continue...");
                 System.in.read();
-
             } catch (InputMismatchException ex) {
                 System.out.print("Incorrect value\n");
             } catch (Exception e) {
